@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EndMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
     public void Quit()
     {
         Application.Quit();

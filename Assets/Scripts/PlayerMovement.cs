@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D coll;
     private SpriteRenderer sprite;
     private Animator anim;
-    private Animator animator;
 
     [SerializeField] private LayerMask jumpableGround;
     private AudioSource audioSource;
@@ -23,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerLife playerlife;
 
-    private Eagle eagle;
+    //private Enemy enemy;
     //[SerializeField] private AudioSource jumpSoundEffect;
     // Start is called before the first frame update
     void Start()
@@ -34,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        animator = GetComponent<Animator>();
-
         playerlife = FindObjectOfType<PlayerLife>();
 
     }
@@ -50,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             audioSource.PlayOneShot(jumpClip);
-            //jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             
         }
@@ -59,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void UpdateAnimationState()
     {
-        // MovementState state;
 
         if (dirX > 0f)
         {
@@ -92,34 +87,27 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         
         if (other.gameObject.tag == "Enemy"){
-            Frog frog = other.gameObject.GetComponent<Frog>();
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (state == MovementState.falling )
             {
-                frog.JumpedOn();
-                rb.velocity = new Vector2(rb.velocity.x, 5);
-                //Destroy(other.gameObject);
-                //enemyLife.DieEnemy();
-                //eagle.deathEnemy();
-                // animator.SetTrigger("deathEnemy");
-                //Destroy(other.gameObject);
+                enemy.JumpedOn();
+                rb.velocity = new Vector2(rb.velocity.x, 7);
             }
 
             if (state != MovementState.falling)
             {
                 playerlife.Die();
+                
             }
-
+          
             
         }
         if (other.gameObject.tag == "Enemy2"){
-            Eagle eagle = other.gameObject.GetComponent<Eagle>();
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (state == MovementState.falling )
             {
-                eagle.JumpedOn();
+                enemy.JumpedOn();
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                //enemyLife.DieEnemy();
-                // animator.SetTrigger("deathEnemy");
-                //Destroy(other.gameObject);
             }
 
             if (state != MovementState.falling)
@@ -130,22 +118,6 @@ public class PlayerMovement : MonoBehaviour
             
         }
         
-        // if (other.gameObject.name == "eagle")
-        // {
-        //     if (state == MovementState.falling )
-        //     {
-        //         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        //         //enemyLife.DieEnemy();
-        //         //animator.SetTrigger("deathEnemy");
-        //         //Destroy(other.gameObject);
-                
-        //     }
-        //     if (state != MovementState.falling)
-        //     {
-        //         playerlife.Die();
-        //     }
-        // }
-    
     }
 
     

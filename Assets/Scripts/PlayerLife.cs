@@ -10,7 +10,6 @@ public class PlayerLife : MonoBehaviour
     private Animator anim;
     
 
-    //[SerializeField] private AudioSource deathSoundEffect;
     private AudioSource audioSource;
 
     void Start()
@@ -26,15 +25,23 @@ public class PlayerLife : MonoBehaviour
         {
             Die();
         }
-    }
+                
+        }
+        
 
     public void Die()
     {
         
         audioSource.PlayOneShot(deathClip);
-        //deathSoundEffect.Play();
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("death");
+    }
+
+    public void Die2()
+    {
+        anim.SetTrigger("death");
+        
+        
     }
 
     private void RestartLevel()

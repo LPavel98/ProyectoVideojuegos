@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Eagle : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private Animator anim;
     private void Start() {
