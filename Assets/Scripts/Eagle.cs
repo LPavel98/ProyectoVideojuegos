@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Eagle : MonoBehaviour
 {
+    private Animator anim;
+    private void Start() {
+    anim = GetComponent<Animator>();
+    }
     
-    public void deathEnemy(){
-        
-        Destroy(this.gameObject);
+    
+    public void JumpedOn(){
+        anim.SetTrigger("deathEnemy");
+    }
 
+    private void deathEnemy(){
+        Destroy(this.gameObject);
     }
 }

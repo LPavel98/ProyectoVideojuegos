@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public MovementState state;
 
     private PlayerLife playerlife;
-    private EnemyLife enemyLife;
 
     private Eagle eagle;
     //[SerializeField] private AudioSource jumpSoundEffect;
@@ -38,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
 
         playerlife = FindObjectOfType<PlayerLife>();
-        enemyLife = FindObjectOfType<EnemyLife>();
 
     }
 
@@ -98,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             if (state == MovementState.falling )
             {
                 frog.JumpedOn();
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                rb.velocity = new Vector2(rb.velocity.x, 5);
                 //Destroy(other.gameObject);
                 //enemyLife.DieEnemy();
                 //eagle.deathEnemy();
@@ -114,10 +112,10 @@ public class PlayerMovement : MonoBehaviour
             
         }
         if (other.gameObject.tag == "Enemy2"){
-            //Frog frog = other.gameObject.GetComponent<Frog>();
+            Eagle eagle = other.gameObject.GetComponent<Eagle>();
             if (state == MovementState.falling )
             {
-                //frog.JumpedOn();
+                eagle.JumpedOn();
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 //enemyLife.DieEnemy();
                 // animator.SetTrigger("deathEnemy");
