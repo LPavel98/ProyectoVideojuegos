@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public AudioClip jumpClip;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private BoxCollider2D coll;
     private SpriteRenderer sprite;
     private Animator anim;
+    private Animator animator;
 
     [SerializeField] private LayerMask jumpableGround;
     private AudioSource audioSource;
@@ -17,22 +18,34 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
 
-    private enum MovementState { idle, running, jumping, falling }
+    public enum MovementState { idle, running, jumping, falling }
+    public MovementState state;
 
+    private PlayerLife playerlife;
+    private EnemyLife enemyLife;
+
+    private Eagle eagle;
     //[SerializeField] private AudioSource jumpSoundEffect;
     // Start is called before the first frame update
     void Start()
     {
+        
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+
+        playerlife = FindObjectOfType<PlayerLife>();
+        enemyLife = FindObjectOfType<EnemyLife>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
@@ -41,13 +54,14 @@ public class PlayerMovement : MonoBehaviour
             audioSource.PlayOneShot(jumpClip);
             //jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            
         }
 
         UpdateAnimationState();
     }
     private void UpdateAnimationState()
     {
-        MovementState state;
+        // MovementState state;
 
         if (dirX > 0f)
         {
@@ -74,7 +88,69 @@ public class PlayerMovement : MonoBehaviour
         }
 
         anim.SetInteger("state", (int)state);
+        
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        
+        if (other.gameObject.tag == "Enemy"){
+            //Frog frog = other.gameObject.GetComponent<Frog>();
+            if (state == MovementState.falling )
+            {
+                //frog.JumpedOn();
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                Destroy(other.gameObject);
+                //enemyLife.DieEnemy();
+                //eagle.deathEnemy();
+                // animator.SetTrigger("deathEnemy");
+                //Destroy(other.gameObject);
+            }
+
+            if (state != MovementState.falling)
+            {
+                playerlife.Die();
+            }
+
+            
+        }
+        if (other.gameObject.tag == "Enemy2"){
+            //Frog frog = other.gameObject.GetComponent<Frog>();
+            if (state == MovementState.falling )
+            {
+                //frog.JumpedOn();
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                //enemyLife.DieEnemy();
+                // animator.SetTrigger("deathEnemy");
+                //Destroy(other.gameObject);
+            }
+
+            if (state != MovementState.falling)
+            {
+                playerlife.Die();
+            }
+
+            
+        }
+        
+        // if (other.gameObject.name == "eagle")
+        // {
+        //     if (state == MovementState.falling )
+        //     {
+        //         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        //         //enemyLife.DieEnemy();
+        //         //animator.SetTrigger("deathEnemy");
+        //         //Destroy(other.gameObject);
+                
+        //     }
+        //     if (state != MovementState.falling)
+        //     {
+        //         playerlife.Die();
+        //     }
+        // }
+    
+    }
+
+    
 
     private bool IsGrounded()
     {

@@ -8,6 +8,7 @@ public class PlayerLife : MonoBehaviour
     public AudioClip deathClip;
     private Rigidbody2D rb;
     private Animator anim;
+    
 
     //[SerializeField] private AudioSource deathSoundEffect;
     private AudioSource audioSource;
@@ -27,8 +28,9 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
+        
         audioSource.PlayOneShot(deathClip);
         //deathSoundEffect.Play();
         rb.bodyType = RigidbodyType2D.Static;
