@@ -94,12 +94,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         
         if (other.gameObject.tag == "Enemy"){
-            //Frog frog = other.gameObject.GetComponent<Frog>();
+            Frog frog = other.gameObject.GetComponent<Frog>();
             if (state == MovementState.falling )
             {
-                //frog.JumpedOn();
+                frog.JumpedOn();
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
                 //enemyLife.DieEnemy();
                 //eagle.deathEnemy();
                 // animator.SetTrigger("deathEnemy");
