@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
+    // [SerializeField] private int health;
+
     [SerializeField] private LayerMask jumpableGround;
     private AudioSource audioSource;
 
@@ -96,7 +98,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (state != MovementState.falling)
             {
-                playerlife.Die();
+                //health -=1;
+                playerlife.Die2();
                 
             }
           
