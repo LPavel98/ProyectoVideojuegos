@@ -7,14 +7,17 @@ public class ItemCollector : MonoBehaviour
 {
     public AudioClip collectorClip;
     private int cherries = 0;
+    private int record;
 
     [SerializeField] private Text cherriesText;
+    [SerializeField] private Text puntajeRecord;//
 
     private AudioSource audioSource;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        puntajeRecord.text = PlayerPrefs.GetInt("PuntajeRecord", 0).ToString();
         
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,6 +29,14 @@ public class ItemCollector : MonoBehaviour
             Destroy(collision.gameObject);
             cherries++;
             cherriesText.text = "x" + cherries;
+
+            if (cherries > PlayerPrefs.GetInt("PuntajeRecord", cherries))
+            {
+                PlayerPrefs.SetInt("PuntajeRecord", cherries);
+                puntajeRecord.text = cherries.ToString();
+            }
+                                 
         }
     }
+    
 }
