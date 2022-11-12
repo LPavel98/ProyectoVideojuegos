@@ -7,10 +7,10 @@ public class PlayerMovement : MonoBehaviour
     public bool sePuedeMover = true;
     //[SerializeField] private Vector2 velocidadRebote;
 
-    public float KBForce;
+    public float KBForce = 7;
     public float KBCounter;
-    public float KBTotalTime;
-    public bool KnockFromRight;
+    public float KBTotalTime = .3f;
+    public bool KnockFromRight = true;
 
 
     public AudioClip jumpClip;
@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             
         }
+        
         
              UpdateAnimationState();
         
