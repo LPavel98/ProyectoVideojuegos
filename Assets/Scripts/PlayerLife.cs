@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerLife : MonoBehaviour
 {
+    private PlayerMovement playerMovement;
+    [SerializeField] private float tiempoPerdidaControl;
 
     [SerializeField] private Text livesText;
     private int lives=5;
@@ -24,6 +26,7 @@ public class PlayerLife : MonoBehaviour
 
     void Start()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -32,6 +35,8 @@ public class PlayerLife : MonoBehaviour
         livesText.text = "Lives: " +lives;
 
     }
+
+   
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -49,7 +54,18 @@ public class PlayerLife : MonoBehaviour
         }
                 
         }
-    
+
+       
+
+    //  public void TomarDaño(Vector2 posicion){
+    //     StartCoroutine(PerderControl());
+    //     playerMovement.Rebote(posicion);
+    // }
+    // private IEnumerator PerderControl(){
+    //     playerMovement.sePuedeMover = false;
+    //     yield return new WaitForSeconds(tiempoPerdidaControl);
+    //     playerMovement.sePuedeMover = true;
+    // }
         
 
     public void Die()

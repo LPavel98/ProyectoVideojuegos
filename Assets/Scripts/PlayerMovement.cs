@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool sePuedeMover = true;
+    //[SerializeField] private Vector2 velocidadRebote;
+
+    public float KBForce;
+    public float KBCounter;
+    public float KBTotalTime;
+    public bool KnockFromRight;
+
+
     public AudioClip jumpClip;
     public Rigidbody2D rb;
     private BoxCollider2D coll;
@@ -43,8 +52,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         
-        dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        // dirX = Input.GetAxisRaw("Horizontal");
+        // rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -52,13 +61,38 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             
         }
-
-        UpdateAnimationState();
+        
+             UpdateAnimationState();
+        
+       
     }
+
+    
+
+
     private void UpdateAnimationState()
     {
+        if (KBCounter <= 0)
+        {
+            dirX = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        }
 
-        if (dirX > 0f)
+        else
+        {
+            if (KnockFromRight==true)
+            {
+                rb.velocity = new Vector2(-KBForce, KBForce);
+            }
+            if (KnockFromRight==false)
+            {
+                rb.velocity = new Vector2(KBForce, KBForce);
+            }
+            KBCounter -= Time.deltaTime;
+        }
+
+
+            if (dirX > 0f)
         {
             state = MovementState.running;
             sprite.flipX = false;
@@ -84,8 +118,19 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetInteger("state", (int)state);
         
+            
+        
+
+        
+        
     }
 
+
+    // public void Rebote(Vector2 puntoGolpe){
+    //      rb.velocity = new Vector2(-moveSpeed * 100, velocidadRebote.y);
+    // }
+
+   
     private void OnCollisionEnter2D(Collision2D other) {
         
         if (other.gameObject.tag == "Enemy"){
@@ -98,7 +143,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (state != MovementState.falling)
             {
-                //health -=1;
+                
+               
                 playerlife.Die2();
                 
             }

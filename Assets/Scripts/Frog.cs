@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
+    public PlayerMovement playerMovement;
+
     private Rigidbody2D rb;
     private Collider2D coll;
     private Animator anim;
@@ -41,7 +43,27 @@ public class Frog : MonoBehaviour
         if (other.gameObject.name=="Terrain")
         {
           rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }      
+        }
+
+        if (other.gameObject.tag=="Player")
+        {
+            playerMovement.KBCounter = playerMovement.KBTotalTime;
+            if (other.transform.position.x <= transform.position.x)
+            {
+                playerMovement.KnockFromRight = true;
+            }
+          if (other.transform.position.x > transform.position.x)
+            {
+                playerMovement.KnockFromRight = false;
+            }
+
+        }
+
+       
+        // if (other.gameObject.CompareTag("Player"))
+        // {
+        //     other.gameObject.GetComponent<PlayerLife>().TomarDaño(other.GetContact(0).normal);
+        // }      
     }
 
 }
