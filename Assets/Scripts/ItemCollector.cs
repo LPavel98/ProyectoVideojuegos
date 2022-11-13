@@ -9,6 +9,8 @@ public class ItemCollector : MonoBehaviour
     private int cherries; /*= 0*/
     private int record;
 
+    private PlayerLife playerLife;
+
     [SerializeField] private Text cherriesText;
     [SerializeField] private Text puntajeRecord;//
 
@@ -20,13 +22,14 @@ public class ItemCollector : MonoBehaviour
         puntajeRecord.text = PlayerPrefs.GetInt("PuntajeRecord", 0).ToString();
         cherries = PlayerPrefs.GetInt("cherriesText", 0);
         cherriesText.text = "x"+cherries.ToString();
+        playerLife = GetComponent<PlayerLife>();
        
         
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Enemy2"||other.gameObject.tag == "Trap"){
+        if (other.gameObject.tag == "Trap" || playerLife.lives == 0){
             cherries = 0;
             PlayerPrefs.SetInt("cherriesText", cherries);
             cherriesText.text = "x" +cherries.ToString(); 

@@ -10,7 +10,7 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private float tiempoPerdidaControl;
 
     [SerializeField] private Text livesText;
-    private int lives=5;
+    public int lives=5;
     
 
     public AudioClip deathClip;
@@ -30,9 +30,14 @@ public class PlayerLife : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        //lives = PlayerPrefs.GetInt("livesText", lives);
+        //livesText.text = "x: "+lives.ToString();
     }
     void Update(){
-        livesText.text = "Lives: " +lives;
+        //livesText.text = "Lives: " +lives;
+        PlayerPrefs.SetInt("livesText", lives);
+        livesText.text = "Lives: " +lives.ToString(); 
+        
 
     }
 
@@ -45,12 +50,17 @@ public class PlayerLife : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             Die();
+            lives = 0;
+            PlayerPrefs.SetInt("livesText", lives);
+            livesText.text = "Lives: " +lives.ToString(); 
+            
         }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
             lives -=1;
             Die2();
+            //lives = 5;
         }
                 
         }
@@ -71,8 +81,10 @@ public class PlayerLife : MonoBehaviour
            rb.bodyType = RigidbodyType2D.Static;
 
             anim.SetTrigger("death");
+            //lives = 5;
 
         }
+        
         
         
     }
@@ -80,6 +92,6 @@ public class PlayerLife : MonoBehaviour
     private void RestartLevel()
     {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-         SceneManager.LoadScene (sceneBuildIndex:1);
+         SceneManager.LoadScene (sceneBuildIndex:5);
     }
 }
