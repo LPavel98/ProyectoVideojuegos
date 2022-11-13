@@ -131,6 +131,8 @@ public class PlayerMovement : MonoBehaviour
     //      rb.velocity = new Vector2(-moveSpeed * 100, velocidadRebote.y);
     // }
 
+    
+
    
     private void OnCollisionEnter2D(Collision2D other) {
         

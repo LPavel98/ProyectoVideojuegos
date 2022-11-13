@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ItemCollector : MonoBehaviour
 {
     public AudioClip collectorClip;
-    private int cherries = 0;
+    private int cherries; /*= 0*/
     private int record;
 
     [SerializeField] private Text cherriesText;
@@ -18,14 +18,30 @@ public class ItemCollector : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         puntajeRecord.text = PlayerPrefs.GetInt("PuntajeRecord", 0).ToString();
+        cherries = PlayerPrefs.GetInt("cherriesText", 0);
+        cherriesText.text = "x"+cherries.ToString();
+       
         
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Enemy2"||other.gameObject.tag == "Trap"){
+            cherries = 0;
+            PlayerPrefs.SetInt("cherriesText", cherries);
+            cherriesText.text = "x" +cherries.ToString(); 
+            
+        }
+        
+        
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Cherry"))
         {
+            
             audioSource.PlayOneShot(collectorClip);
-            //collectionSoundEffect.Play();
             Destroy(collision.gameObject);
             cherries++;
             cherriesText.text = "x" + cherries;
@@ -37,6 +53,21 @@ public class ItemCollector : MonoBehaviour
             }
                                  
         }
+
+        if (collision.gameObject.name == "Finish")
+        {
+            Debug.Log("Tocó la bandera");
+           //PlayerPrefs.SetInt("CherriesRecord", cherries);
+            PlayerPrefs.SetInt("cherriesText", cherries);
+                cherriesText.text = "x"+cherries.ToString();
+                
+            // cherries =  cherries;
+            // cherriesText.text = "xxx" + cherries;
+
+         
+        }
     }
+
+    
     
 }

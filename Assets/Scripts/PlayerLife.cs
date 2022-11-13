@@ -54,18 +54,6 @@ public class PlayerLife : MonoBehaviour
         }
                 
         }
-
-       
-
-    //  public void TomarDaño(Vector2 posicion){
-    //     StartCoroutine(PerderControl());
-    //     playerMovement.Rebote(posicion);
-    // }
-    // private IEnumerator PerderControl(){
-    //     playerMovement.sePuedeMover = false;
-    //     yield return new WaitForSeconds(tiempoPerdidaControl);
-    //     playerMovement.sePuedeMover = true;
-    // }
         
 
     public void Die()
@@ -91,6 +79,7 @@ public class PlayerLife : MonoBehaviour
 
     private void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+         SceneManager.LoadScene (sceneBuildIndex:1);
     }
 }
