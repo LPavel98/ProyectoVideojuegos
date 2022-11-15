@@ -1287,7 +1287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb3080d1ae30f543a6a7d25d3fb49cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 903411647}
+  offset: {x: 0, y: 0, z: -10}
+  target: {fileID: 1910094621}
+  smootherFactor: 1.56
 --- !u!82 &519420034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1749,11 +1751,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9c1669c824a2f44a4cbc126e5d4246, type: 3}
---- !u!4 &903411647 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
-  m_PrefabInstance: {fileID: 1910094620}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &911879591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2997,11 +2994,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.248003
+      value: 25.14
       objectReference: {fileID: 0}
     - target: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.41974187
+      value: 1.08
       objectReference: {fileID: 0}
     - target: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3045,6 +3042,11 @@ PrefabInstance:
       objectReference: {fileID: 1563911636}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
+--- !u!4 &1910094621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
+  m_PrefabInstance: {fileID: 1910094620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1928285881
 PrefabInstance:
   m_ObjectHideFlags: 0

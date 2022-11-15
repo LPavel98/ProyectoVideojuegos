@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ItemCollector : MonoBehaviour
 {
     public AudioClip collectorClip;
-    private int cherries; /*= 0*/
+    private int cherries; 
     private int record;
 
     private PlayerLife playerLife;
@@ -49,7 +49,7 @@ public class ItemCollector : MonoBehaviour
             cherries++;
             cherriesText.text = "x" + cherries;
 
-            if (cherries > PlayerPrefs.GetInt("PuntajeRecord", cherries))
+            if (cherries > PlayerPrefs.GetInt("PuntajeRecord", 0))
             {
                 PlayerPrefs.SetInt("PuntajeRecord", cherries);
                 puntajeRecord.text = cherries.ToString();
@@ -60,16 +60,16 @@ public class ItemCollector : MonoBehaviour
         if (collision.gameObject.name == "Finish")
         {
             Debug.Log("Tocó la bandera");
-           //PlayerPrefs.SetInt("CherriesRecord", cherries);
             PlayerPrefs.SetInt("cherriesText", cherries);
-                cherriesText.text = "x"+cherries.ToString();
-                
-            // cherries =  cherries;
-            // cherriesText.text = "xxx" + cherries;
-
-         
+            cherriesText.text = "x"+cherries.ToString();
+                  
         }
     }
+
+    // public void BorrarDatos(){
+    //     PlayerPrefs.DeleteKey("PuntajeRecord");
+    //     cherriesText.text = "x"+cherries.ToString();
+    // }
 
     
     
