@@ -56,14 +56,23 @@ public class PlayerLife : MonoBehaviour
             
         }
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy2"))
         {
             lives -=1;
             Die2();
             //lives = 5;
         }
+
+        
                 
-        }
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("TrapBox") )
+        {
+            Die();
+        }  
+    }
+
         
 
     public void Die()

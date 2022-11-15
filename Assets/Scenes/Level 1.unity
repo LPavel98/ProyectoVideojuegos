@@ -1374,7 +1374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb3080d1ae30f543a6a7d25d3fb49cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1241924386}
+  offset: {x: 0, y: 0, z: -10}
+  target: {fileID: 1241924386}
+  smootherFactor: 1.73
 --- !u!82 &519420034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7489,11 +7491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62.79
+      value: -2.7
       objectReference: {fileID: 0}
     - target: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.37
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 1395296624587756661, guid: c76b1eac35c4c0b4c97f9b642aa8ec50, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7788,6 +7790,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 666246581}
     m_Modifications:
+    - target: {fileID: 1979742584, guid: a3ed841a53fef21489968c1b3d2568e4, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 1241924389}
     - target: {fileID: 4479595950534271114, guid: a3ed841a53fef21489968c1b3d2568e4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7843,6 +7849,10 @@ PrefabInstance:
     - target: {fileID: 4479595950534271117, guid: a3ed841a53fef21489968c1b3d2568e4, type: 3}
       propertyPath: m_Name
       value: eagle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479595950534271117, guid: a3ed841a53fef21489968c1b3d2568e4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ed841a53fef21489968c1b3d2568e4, type: 3}

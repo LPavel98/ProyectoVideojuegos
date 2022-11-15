@@ -8,6 +8,8 @@ TagManager:
   - Trap
   - Enemy
   - Enemy2
+  - TrapBox
+  - Terrain
   layers:
   - Default
   - TransparentFX
