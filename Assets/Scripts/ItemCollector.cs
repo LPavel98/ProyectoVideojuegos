@@ -21,6 +21,7 @@ public class ItemCollector : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         puntajeRecord.text = PlayerPrefs.GetInt("PuntajeRecord", 0).ToString();
         cherries = PlayerPrefs.GetInt("cherriesText", 0);
+        
         cherriesText.text = "x"+cherries.ToString();
         playerLife = GetComponent<PlayerLife>();
        
@@ -48,7 +49,7 @@ public class ItemCollector : MonoBehaviour
             Destroy(collision.gameObject);
             cherries++;
             cherriesText.text = "x" + cherries;
-
+            //PlayerPrefs.SetInt("PuntajeRecord", 0);//reset POINTS RECORD
             if (cherries > PlayerPrefs.GetInt("PuntajeRecord", 0))
             {
                 PlayerPrefs.SetInt("PuntajeRecord", cherries);
