@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOver.unity
     guid: 2147e9b89c772f844a4881b62b2e3d20
   - enabled: 1
+    path: Assets/Scenes/MaxScore.unity
+    guid: 2961599881e858b45831925d68c42d8f
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

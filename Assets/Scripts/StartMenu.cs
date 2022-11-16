@@ -11,4 +11,16 @@ public class StartMenu : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadScene (sceneBuildIndex:1);
     }
+
+    public void MaxScore()
+    {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene (sceneBuildIndex:6);
+    }
+
+    public void StartScreen()
+    {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene (sceneBuildIndex:0);
+    }
 }
