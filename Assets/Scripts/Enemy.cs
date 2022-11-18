@@ -5,8 +5,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public PlayerMovement playerMovement;
+    
 
+    
     private Animator anim;
+
+
     private void Start() {
     anim = GetComponent<Animator>();
     
@@ -30,11 +34,11 @@ public class Enemy : MonoBehaviour
             {
                 playerMovement.KnockFromRight = true;
             }
-          if (other.transform.position.x > transform.position.x)
+            if (other.transform.position.x > transform.position.x)
             {
                 playerMovement.KnockFromRight = false;
             }
-
+            
         }
 
       

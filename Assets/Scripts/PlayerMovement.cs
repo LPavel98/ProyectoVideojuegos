@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     public AudioClip jumpClip;
+    public AudioClip choqueClip;
+    public AudioClip exploteClip;
     public Rigidbody2D rb;
     private BoxCollider2D coll;
     private SpriteRenderer sprite;
@@ -140,6 +142,8 @@ public class PlayerMovement : MonoBehaviour
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (state == MovementState.falling )
             {
+                audioSource.PlayOneShot(exploteClip);
+                playerlife.lives +=1;
                 enemy.JumpedOn();
                 rb.velocity = new Vector2(rb.velocity.x, 7);
             }
@@ -147,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
             if (state != MovementState.falling)
             {
                 
-               
+               audioSource.PlayOneShot(choqueClip);
                 playerlife.Die2();
                 
             }
@@ -158,12 +162,15 @@ public class PlayerMovement : MonoBehaviour
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (state == MovementState.falling )
             {
+                audioSource.PlayOneShot(exploteClip);
+                playerlife.lives +=1;
                 enemy.JumpedOn();
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
 
             if (state != MovementState.falling)
             {
+                audioSource.PlayOneShot(choqueClip);
                 playerlife.Die2();
             }
 

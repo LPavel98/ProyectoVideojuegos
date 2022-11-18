@@ -19,10 +19,11 @@ public class Finish : MonoBehaviour
     {
         if (collision.gameObject.name == "Player" && !levelCompleted)
         {
-            audioSource.PlayOneShot(finishClip);
+                    
             levelCompleted = true;
+            audioSource.PlayOneShot(finishClip);
             Invoke("CompleteLevel", 1f);
-         
+                     
         }
     }
 

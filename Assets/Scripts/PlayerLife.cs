@@ -36,7 +36,7 @@ public class PlayerLife : MonoBehaviour
     void Update(){
         //livesText.text = "Lives: " +lives;
         PlayerPrefs.SetInt("livesText", lives);
-        livesText.text = "Lives: " +lives.ToString(); 
+        livesText.text = "x" +lives.ToString(); 
         
 
     }
@@ -52,7 +52,7 @@ public class PlayerLife : MonoBehaviour
             Die();
             lives = 0;
             PlayerPrefs.SetInt("livesText", lives);
-            livesText.text = "Lives: " +lives.ToString(); 
+            livesText.text = "x" +lives.ToString(); 
             
         }
 
@@ -87,8 +87,8 @@ public class PlayerLife : MonoBehaviour
         
         if (lives==0)
         {
+            audioSource.PlayOneShot(deathClip);
            rb.bodyType = RigidbodyType2D.Static;
-
             anim.SetTrigger("death");
             //lives = 5;
 
