@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ItemCollector : MonoBehaviour
 {
     public AudioClip collectorClip;
-    private int cherries; 
+    public int cherries; 
     private int record;
 
     private PlayerLife playerLife;
@@ -20,8 +20,8 @@ public class ItemCollector : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         puntajeRecord.text = PlayerPrefs.GetInt("PuntajeRecord", 0).ToString();
+
         cherries = PlayerPrefs.GetInt("cherriesText", 0);
-        
         cherriesText.text = "x"+cherries.ToString();
         playerLife = GetComponent<PlayerLife>();
        

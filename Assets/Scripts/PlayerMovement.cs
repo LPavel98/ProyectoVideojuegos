@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public bool sePuedeMover = true;
-    //[SerializeField] private Vector2 velocidadRebote;
 
     public float KBForce = 7;
     public float KBCounter;
@@ -53,9 +52,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        // dirX = Input.GetAxisRaw("Horizontal");
-        // rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
@@ -78,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if (KBCounter <= 0)
         {
             dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
         }
 
         else
@@ -95,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-            if (dirX > 0f)
+        if (dirX > 0f)
         {
             state = MovementState.running;
             sprite.flipX = false;
@@ -121,19 +117,9 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetInteger("state", (int)state);
         
-            
-        
-
-        
         
     }
-
-
-    // public void Rebote(Vector2 puntoGolpe){
-    //      rb.velocity = new Vector2(-moveSpeed * 100, velocidadRebote.y);
-    // }
-
-    
+   
     
    
     private void OnCollisionEnter2D(Collision2D other) {
@@ -176,15 +162,10 @@ public class PlayerMovement : MonoBehaviour
 
             
         }
-        
-        
-
-        
-        
+          
     }
 
     
-
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);

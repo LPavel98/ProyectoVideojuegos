@@ -10,7 +10,7 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private float tiempoPerdidaControl;
 
     [SerializeField] private Text livesText;
-    public int lives=5;
+    public int lives;
     
 
     public AudioClip deathClip;
@@ -30,16 +30,19 @@ public class PlayerLife : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        //lives = PlayerPrefs.GetInt("livesText", lives);
-        //livesText.text = "x: "+lives.ToString();
+
+
+
+        lives = PlayerPrefs.GetInt("livesText", 0);
+        livesText.text = "x"+lives.ToString();
+        
     }
-    void Update(){
-        //livesText.text = "Lives: " +lives;
-        PlayerPrefs.SetInt("livesText", lives);
-        livesText.text = "x" +lives.ToString(); 
+    // void Update(){
+    //     PlayerPrefs.SetInt("livesText", lives);
+    //     livesText.text = "x" +lives.ToString(); 
         
 
-    }
+    // }
 
    
 
@@ -50,36 +53,53 @@ public class PlayerLife : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             Die();
-            lives = 0;
+            lives = 5;
             PlayerPrefs.SetInt("livesText", lives);
-            livesText.text = "x" +lives.ToString(); 
-            
         }
 
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Enemy2"))
         {
             lives -=1;
             Die2();
-            //lives = 5;
+            livesText.text = "x" +lives.ToString();
+            if(lives == 0){
+                lives = 5;
+                PlayerPrefs.SetInt("livesText", lives);
+            }
+            
+            
         }
 
         
                 
     }
+
+    
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("TrapBox") )
         {
             Die();
+            PlayerPrefs.SetInt("livesText", lives);
+            livesText.text = "x" +lives.ToString(); 
         }  
+
+        if (other.gameObject.name == "Finish")
+        {
+            PlayerPrefs.SetInt("livesText", lives);
+            livesText.text = "x" +lives.ToString(); 
+                  
+        }
     }
 
         
-
     public void Die()
     {        
         audioSource.PlayOneShot(deathClip);
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("death");
+        lives = 0;
+        PlayerPrefs.SetInt("livesText", lives);
+        livesText.text = "x" +lives.ToString(); 
     }
 
     public void Die2()
@@ -88,11 +108,14 @@ public class PlayerLife : MonoBehaviour
         if (lives==0)
         {
             audioSource.PlayOneShot(deathClip);
-           rb.bodyType = RigidbodyType2D.Static;
+            rb.bodyType = RigidbodyType2D.Static;
             anim.SetTrigger("death");
-            //lives = 5;
-
+            
+            lives = 0;
+            PlayerPrefs.SetInt("livesText", lives);
+            livesText.text = "x" +lives.ToString();
         }
+        
         
         
         

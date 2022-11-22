@@ -11,11 +11,7 @@ public class WaypointFollower : MonoBehaviour
     [SerializeField] private float speed = 2f;
     void Start()
     {
-        //Debug.Log("Iniciamos script de player");
-        //gameManager = FindObjectOfType<GameManagerController>();
-        //rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        //animator = GetComponent<Animator>();
     }
 
     void Update()
